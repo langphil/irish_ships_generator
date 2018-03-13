@@ -24,12 +24,12 @@ def formString():
         for row in reader:
             migrantFirstName = row[0].title()
             migrantSurName = row[1].title()
-            migrantAge = row[2].replace("age", "aged")
+            migrantAge = str(int(row[2].split(' ')[1]))
             migrantCountry = row[3].title()
             migrantEmbark = row[4].title()
             migrantDate = datetime.strptime(row[5], "%m/%d/%Y")
             migrantDate = "{0:} {1:} {2:}".format(months[migrantDate.month - 1], migrantDate.day, migrantDate.year)
-            migrant = migrantFirstName + ' ' + migrantSurName + ', ' + migrantAge + ', from ' + migrantCountry + ', ' + 'arrived in New York on ' + migrantDate + ', having embarked from ' + migrantEmbark + '.\n'
+            migrant = migrantFirstName + ' ' + migrantSurName + ', aged ' + migrantAge + ', from ' + migrantCountry + ', ' + 'arrived in New York on ' + migrantDate + ', having embarked from ' + migrantEmbark + '.\n'
             outfile.write(migrant)
 
 
