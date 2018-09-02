@@ -6,12 +6,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from time import sleep
-import re
+import re, os, config
 import pandas as pd
-import os
 
 
-url = """url"""
+url = config.CONFIG['url']
 
 res = []
 failedPages = []

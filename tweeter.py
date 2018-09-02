@@ -1,9 +1,9 @@
-import tweepy, time, sys, os
+import tweepy, time, sys, os, config
 
-CONSUMER_KEY = consumer_key
-CONSUMER_SECRET = consumer_secret
-ACCESS_KEY = access_key
-ACCESS_SECRET = access_secret
+CONSUMER_KEY = config.CONFIG['consumer_key']
+CONSUMER_SECRET = config.CONFIG['consumer_secret']
+ACCESS_KEY = config.CONFIG['access_key']
+ACCESS_SECRET = config.CONFIG['access_secret']
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
