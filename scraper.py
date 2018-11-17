@@ -17,9 +17,9 @@ failedPages = []
 
 def setupSelenium():
 	options = Options()
-	options.set_headless(headless=True)
+	options.headless = True
 
-	return webdriver.Firefox(firefox_options=options)
+	return webdriver.Firefox(options=options)
 
 def setupDriver(driver, num):
 	driver.get(url + str(num))
@@ -46,14 +46,14 @@ def loadWebpage(driver, num):
 	rowCount = setupDriver(driver, num)
 
 	while rowCount < 50:
-		print 'ERROR: only %s rows found, reattempting load of DOM...' %(rowCount)
+		print ('ERROR: only %s rows found, reattempting load of DOM...' %(rowCount))
 		failedPages.append(num)
 		rowCount = resetDriver(driver, num)
 
 def getTable(driver, res, num):
 	table_rows = setupBeautifulSoup(driver)
 
-	print "%s rows scraped and saved to csv from page %s" %(len(table_rows) - 2, num)
+	print ("%s rows scraped and saved to csv from page %s" %(len(table_rows) - 2, num))
 
 	for tr in table_rows:
 		td = tr.find_all('td')
@@ -74,7 +74,8 @@ def cleanDataframe(df):
 	return df
 
 def urlLoopAndScrape(res):
-	for num in range(1495, 1994):
+	# Will scrape the initial page and 499 after that, 500 in total.
+	for num in range(1995, 2494):
 		driver = setupSelenium()
 
 		loadWebpage(driver, num)
@@ -84,7 +85,7 @@ def urlLoopAndScrape(res):
 		res = []
 		driver.close()
 
-	print 'Scraping complete'
-	print failedPages
+	print ('Scraping complete')
+	print (failedPages)
 
 urlLoopAndScrape(res)
